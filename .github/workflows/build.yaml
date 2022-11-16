@@ -22,14 +22,30 @@ jobs:
     steps:
       - name: Checkout
         uses: actions/checkout@v3
+
       - name: Cache Primes
         id: cache-primes
         uses: actions/cache@v3
         with:
           path: node_modules
           key: ${{ runner.os }}-node_modules-${{ hashFiles('package-lock.json') }}
+
       - name: Cypress run
         uses: cypress-io/github-action@v4.2.0
         with:
           build: npm run build
           start: npm start
+
+      - name: Cypress video
+        uses: actions/upload-artifact@v3
+        if: always()
+        with:
+          name: error_video
+          path: cypress/videos
+
+      - name: Cypress video
+        uses: actions/upload-artifact@v3
+        if: always()
+        with:
+          name: error_screenshots
+          path: cypress/screenshots
