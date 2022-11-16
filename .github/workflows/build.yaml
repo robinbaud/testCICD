@@ -1,12 +1,14 @@
 on: [push]
 jobs:
-  check-bats-version:
-    runs-on: ubuntu-latest
-    steps:
-      - uses: actions/checkout@v3
-      - uses: actions/setup-node@v3
+  test:
+    - name: Checkout
+        uses: actions/checkout@v2
+      # Install NPM dependencies, cache them correctly
+      # and run all Cypress tests
+      - name: Cypress run
+        uses: cypress-io/github-action@v4.x.x # use the explicit version number
         with:
-          node-version: "14"
-      - run: npm install
-      - run: npm run build
-      - run: ls -la
+          build: npm run build
+          start: npm start
+      
+    
