@@ -43,7 +43,7 @@ jobs:
           name: error_video
           path: cypress/videos
 
-      - name: Cypress video
+      - name: Cypress screenshots
         uses: actions/upload-artifact@v3
         if: always()
         with:
